@@ -1,4 +1,4 @@
-% template_ifbatcc - formato LaTeX p/ textos de trabalhos de conclusão do IFBA/SAJ
+template_ifbatcc - formato LaTeX p/ textos de trabalhos de conclusão do IFBA/SAJ
 
 ## Sobre
 
