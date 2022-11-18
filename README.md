@@ -30,3 +30,7 @@ qual (qualificação de mestrado) e prop (qualificação de doutorado).
 
 * Em caso de dúvidas que não possam ser sanadas verificando o template, 
 verifique o código no arquivo `ifbatcc.cls`.
+
+## Ferramenta de edição online
+
+https://pt.overleaf.com/
