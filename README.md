@@ -33,7 +33,7 @@ verifique o código no arquivo `ifbatcc.cls`.
 
 ## Ferramenta de edição online
 
-https://pt.overleaf.com/ (para user o modelo latex)
-https://www.mettzer.com/
-https://monografis.com.br/
-https://fastformat.co/
+- https://pt.overleaf.com/ (para user o modelo latex)
+- https://www.mettzer.com/
+- https://monografis.com.br/
+- https://fastformat.co/
