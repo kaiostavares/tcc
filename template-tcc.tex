@@ -28,6 +28,8 @@
 %%           twoside - para impressão em frente e verso (padrão)
 \documentclass[tec, rde, classic, a4paper]{ifbatcc}
 \usepackage[utf8]{inputenc}
+\usepackage{nomencl}
+\makenomenclature
 
 %% Preâmbulo:
 %% coloque aqui o seu preambulo LaTeX, i.e., declaração de pacotes,
@@ -153,6 +155,12 @@ DIGITE AS PALAVRAS-CHAVE AQUI
 % Comente para ocultar
 \listoftables
 
+\newcommand{\listadesiglasname}{LISTA DE ABREVIATURAS E SIGLAS}
+\renewcommand{\nomname}{\listadesiglasname}
+\renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
+\printnomenclature[3cm]
+\cleardoublepage
+
 %%
 %% Parte textual
 %%
@@ -175,7 +183,7 @@ DIGITE AS PALAVRAS-CHAVE AQUI
 \label{cap:introducao}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
+Lorem\nomenclature{Lorem}{Lorem} ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam\nomenclature{Aliquam}{Aliquam} ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
 
 Nulla facilisi. Praesent nec massa nulla, interdum lobortis orci. Integer convallis porttitor congue. Etiam lectus ipsum, iaculis eu malesuada malesuada, scelerisque semper est. In convallis ipsum lacus, at dapibus velit. Praesent semper diam eget eros ultrices quis elementum libero cursus. Aliquam erat volutpat. Nunc a lectus augue, id sagittis neque. Aliquam dignissim tempus sem ut pellentesque. Nulla libero orci, elementum vel malesuada mattis, adipiscing sed lorem. Cras lacinia elit vel magna mollis ut congue elit faucibus. Duis ornare mollis est, quis hendrerit neque convallis in.
 
