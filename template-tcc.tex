@@ -26,10 +26,11 @@
 %%         * Paginação
 %%           oneside - para impressão em face única
 %%           twoside - para impressão em frente e verso (padrão)
-\documentclass[tec, rde, classic, a4paper]{ifbatcc}
+\documentclass[tec, ads, scr, classic, a4paper]{ifbatcc}
 \usepackage[utf8]{inputenc}
 \usepackage{nomencl}
 \makenomenclature
+
 
 %% Preâmbulo:
 %% coloque aqui o seu preambulo LaTeX, i.e., declaração de pacotes,
@@ -66,14 +67,14 @@
 % Opcao: [f] - para orientadora do sexo feminino
 % e.g. \coadviser{Prof. Dr. Pedro Pedreira}
 % Comente se não se aplicar
-\coadviser{NOME DO(DA) CO-ORIENTADOR(A)}
+%\coadviser{NOME DO(DA) CO-ORIENTADOR(A)}
 
 %% Inicio do documento
 \begin{document}
 
 %% Catalogação do TCC
 %% IFBA/SAJ - Sigla do curso - Número ordinal de trabalhos dete curso
-\ifbafrontpage{IFBA/SAJ-RDE-XXXX}
+\ifbafrontpage{IFBA/SAJ-ADS-XXXX}
 
 %%
 %% Parte pre-textual
@@ -160,6 +161,7 @@ DIGITE AS PALAVRAS-CHAVE AQUI
 \renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
 \printnomenclature[3cm]
 \cleardoublepage
+\nomenclature{ADS}{Análise e Desenvolvimento de Sistemas}
 
 %%
 %% Parte textual
@@ -183,7 +185,7 @@ DIGITE AS PALAVRAS-CHAVE AQUI
 \label{cap:introducao}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Lorem\nomenclature{Lorem}{Lorem} ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam\nomenclature{Aliquam}{Aliquam} ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
 
 Nulla facilisi. Praesent nec massa nulla, interdum lobortis orci. Integer convallis porttitor congue. Etiam lectus ipsum, iaculis eu malesuada malesuada, scelerisque semper est. In convallis ipsum lacus, at dapibus velit. Praesent semper diam eget eros ultrices quis elementum libero cursus. Aliquam erat volutpat. Nunc a lectus augue, id sagittis neque. Aliquam dignissim tempus sem ut pellentesque. Nulla libero orci, elementum vel malesuada mattis, adipiscing sed lorem. Cras lacinia elit vel magna mollis ut congue elit faucibus. Duis ornare mollis est, quis hendrerit neque convallis in.
 
@@ -210,7 +212,7 @@ Nulla facilisi. Praesent nec massa nulla, interdum lobortis orci. Integer conval
 
 %% Exemplo de Figura
 \begin{figure}[!htb]
-\centerline{\includegraphics[width=.6\textwidth]{ifba_saj.jpeg}}
+\centerline{\includegraphics[width=.8\textwidth]{ifba_saj.jpeg}}
 \caption{Exemplo de Imagem utilizando uma foto do IFBA SAJ.}
 \label{fig:ifba}
 \end{figure}
@@ -225,25 +227,27 @@ Sed sed elit eu ante malesuada aliquet. Nunc quis quam turpis, accumsan faucibus
 %% Foi proposital colocar a legenda com o mesmo nome acima da tabela
 %% Vejam como mesclar células e colocar fundo ;)
 \begin{table}[h]
-\label{tabela:livros}
-\caption{Alguns livros na biblioteca do IFBA Campus SAJ}
 \begin{center}
-\begin{tabular}{|c|l|c|c|c|}
-\hline
-\rowcolor[HTML]{C0C0C0} 
-\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Alguns livros na Biblioteca do IFBA SAJ}}           \\ \hline
-\rowcolor[HTML]{C0C0C0} 
-\textbf{Nº} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Título}} & \textbf{Autor} & \textbf{Área} & \textbf{Quantidade} \\ \hline
-1   & Redes e a Internet            & Fulano         & Redes         & 3            \\ \hline
-2   & Programação é vida            & Beltrano       & ADS           & 4            \\ \hline
-3   & Multimídia 100\%              & Sicrana        & Multimídia    & 5            \\ \hline
+\caption{Alguns livros na biblioteca do IFBA Campus SAJ}
+\label{tabela:livros}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{clccc}
+\toprule
+\textbf{Nº} & \multicolumn{1}{c}{\textbf{Título}} & \textbf{Autor} & \textbf{Área} & \textbf{Quantidade} \\ 
+\toprule 
+                   1   & Redes e a Internet                 & Fulano         & Redes                          & 3                  \\ \midrule
+                   2   & Programação é vida                 & Beltrano       & ADS                            & 4                  \\ \midrule
+  \multirow{2}{*}{3}   & \multirow{2}{*}{Multimídia 100\%}  & Sicrana        & \multirow{2}{*}{Multimídia}    & \multirow{2}{*}{5} \\ 
+                       &                                    & Telânio        &                                & \\   
+\bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{center}
 \end{table}
 
 Phasellus urna nulla, laoreet in imperdiet a, porttitor eu nibh. Phasellus ac arcu magna, sit amet dapibus eros. Maecenas eget metus vitae leo feugiat lobortis ac quis tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque vel augue metus. Quisque fringilla, arcu ut fringilla consectetur, mauris tellus euismod sem, in vehicula est leo vel nisi. Praesent sapien ligula, malesuada eget hendrerit ac, aliquet nec turpis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisi. Mauris commodo elementum elit, fermentum placerat nulla iaculis nec. Vestibulum neque dui, cursus at pharetra eu, sollicitudin eget justo. In id dignissim augue. Fusce interdum malesuada ipsum, non aliquet quam auctor eget. Curabitur turpis libero, pharetra ut cursus porta, pellentesque vitae magna. Cras porttitor interdum nisl \cite{raymond1999}.
 
-A Tabela~\ref{tabela:livros} mostra, de forma fictícia, alguns livros contidos na bilioteca do IFBA \textit{Campus} SAJ. Os mesmos podem ser utilizados para leitura local, como estão disponíveis para empréstimo.
+A Tabela \ref{tabela:livros} mostra, de forma fictícia, alguns livros contidos na bilioteca do IFBA \textit{Campus} SAJ. Os mesmos podem ser utilizados para leitura local, como estão disponíveis para empréstimo.
 
 %%
 %% Parte pós-textual
@@ -272,7 +276,7 @@ A Tabela~\ref{tabela:livros} mostra, de forma fictícia, alguns livros contidos 
 % Colofon
 % Inclui uma pequena nota com referencia a classe IFBATCC
 % Comente para omitir
-%\colophon
+\colophon
 
 %% Fim do documento
 \end{document}

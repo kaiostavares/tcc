@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% ifba.cls
+%%% ifbatcc.cls
 %%% Instituto Federal da Bahia Campus Santo Antônio de Jesus
 %%% (C) 2021 Antônio Cleber de Sousa Araújo
+%%% (C) 2023 Leandro Costa Souza
 %%% Esta classe possui permissão para ser copiada, alterada e distribuída
 %%% Classe destinada a propósitos acadêmicos
 %%% Classe baseada na UFPE Thesis (www.cin.ufpe.br/~paguso/ufpethesis)
@@ -21,7 +22,7 @@
 %%%    SeeAlso             = "book.sty",
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{ifbatcc}[2021/09/08]
+\ProvidesClass{ifbatcc}[2023/07/24]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% OPTIONS 
@@ -110,20 +111,28 @@
 \fi
 \if\@scr0
   \RequirePackage{graphicx}
+  \RequirePackage{color}
 \fi
 \if\@scr1
-  \RequirePackage[dvips]{graphicx}
-  \RequirePackage[dvips,usenames]{color}
-  \RequirePackage[dvipdfm,colorlinks,backref]{hyperref}
+  \RequirePackage{graphicx}
+  %\RequirePackage[dvips,usenames]{color}
+  \RequirePackage[colorlinks,backref]{hyperref}
 \fi
 \RequirePackage[alf]{abntex2cite}
 %\RequirePackage{abntex2}
 \RequirePackage{lastpage}
 \RequirePackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 \RequirePackage{fix-cm}
-\RequirePackage{color}
+\RequirePackage{adjustbox}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\graphicspath{{Figuras/}}
+
+\graphicspath{{imgs/}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GENERAL PURPOSE MACROS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,7 +208,7 @@ grau de \@degree\ em \@course\.}
   \gdef\@colophontext{%
   \urlstyle{rm}%
   Este volume foi tipografado em \LaTeX\ na classe \textsf{IFBATCC}
-  (\url{https://github.com/cleberaraujo/ifbatcc}).
+  (\url{https://github.com/ifbasaj/ifbatcc}).
   \if\@scr1
   Para detalhes sobre este documento, clique \Acrobatmenu{GeneralInfo}{aqui}.
   \fi}
@@ -225,7 +234,7 @@ grau de \@degree\ em \@course\.}
   \gdef\@colophontext{%
   \urlstyle{rm}%
   This volume has been typeset in \LaTeX with the \textsf{IFBATCC} class
-  (\url{https://github.com/cleberaraujo/ifbatcc.git}).
+  (\url{https://github.com/ifbasaj/ifbatcc}).
   \if\@scr1
   For details about this document, click \Acrobatmenu{GeneralInfo}{here}. 
   \fi}
@@ -245,7 +254,7 @@ grau de \@degree\ em \@course\.}
 \def\institute#1{%
   \let\@showinstitute=1
   \gdef\@institute{#1}}
-\institute{Campus Santo Antônio de Jesus}
+\institute{\textit{campus} Santo Antônio de Jesus}
 
 \def\program#1{%
   \gdef\@program{#1}}
@@ -386,7 +395,7 @@ grau de \@degree\ em \@course\.}
 
 \def\library#1{%
   \gdef\@library{#1}}
-\library{Biblioteca do IFBA - Campus Santo Antônio de Jesus}
+\library{Biblioteca do IFBA - \textit{Campus} Santo Antônio de Jesus}
 \def\authorcitationname#1{%
   \gdef\@authorcitationname{#1}}
 \def\advisercitationname#1{%
@@ -541,8 +550,8 @@ grau de \@degree\ em \@course\.}
     \\
   \sf\large
   \textbf{%
-  INSTITUTO FEDERAL DE EDUCAÇÃO,\\CIÊNCIA E TECNOLOGIA DA BAHIA\\
-      Campus Santo Antônio de Jesus
+    INSTITUTO FEDERAL DE EDUCAÇÃO,\\CIÊNCIA E TECNOLOGIA DA BAHIA\\
+    {\it Campus} Santo Antônio de Jesus
   }
   \vskip 25mm
   \textbf{\MakeTextUppercase{\@texttype}}
