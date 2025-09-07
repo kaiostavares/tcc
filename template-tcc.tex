@@ -29,7 +29,7 @@
 %%         * Paginação
 %%           oneside - para impressão em face única
 %%           twoside - para impressão em frente e verso (padrão)
-\documentclass[tec, ads, scr, classic, a4paper]{ifbatcc}
+\documentclass[tec, ads, scr, classic, a4paper,twoside]{ifbatcc}
 \usepackage[utf8]{inputenc}
 \usepackage{nomencl}
 \makenomenclature
@@ -200,6 +200,10 @@ Phasellus urna nulla, laoreet in imperdiet a, porttitor eu nibh. Phasellus ac ar
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
 
+
+Veja o código \ref{lst:javateste}  que mostra um exemplo.
+
+\lstinputlisting[language=java,label=lst:javateste,caption=Exemplo de uso do codigo java em arquivo externo]{code/Teste.java}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
