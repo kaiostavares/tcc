@@ -2,24 +2,37 @@ template_ifbatcc - formato LaTeX p/ textos de trabalhos de conclusão do IFBA/SA
 
 ## Sobre
 
-Este pacote é destinado à escrita de trabalhos de conclusão de curso,
-documentos de qualificação de mestrado e de doutorado,
-dissertações de mestrado e teses de doutorado da 
-Instituto Federal da Bahia, Campus Santo Antônio de Jesus.
+Este pacote é destinado à escrita de trabalhos de conclusão de curso, documentos de qualificação de mestrado e de doutorado, dissertações de mestrado e teses de doutorado da  Instituto Federal da Bahia, Campus Santo Antônio de Jesus.
 
-Este pacote á baseado no
-[UFPEThesis](http://www.cin.ufpe.br/~paguso/ufpethesis/), 
-por Paulo G. S. da Fonseca.
-Adaptado para o IFBA/SAJ por Antônio Cleber de Sousa Araújo em 2021.
+Este pacote á baseado no [UFPEThesis](http://www.cin.ufpe.br/~paguso/ufpethesis/),  por Paulo G. S. da Fonseca. Adaptado para o IFBA/SAJ por Antônio Cleber de Sousa Araújo em 2021 e por Leandro Costa Souza em 2023.
 
 ## Como usar
 
-* Instale o [abnTeX](http://www.abntex.net.br/).
+### Windows
 
-* [Baixe o pacote/clone o projeto] ifba no
-github (https://github.com/cleberaraujo/template_ifbatcc.git).
+- Instale o scoop (https://scoop.sh/)
+```console
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+- instale o git, gh, miktex e perl 
+```console
+scoop install git
+scoop install gh
+scoop install miktex
+scoop install perl
+```
+- faça login no gh
+```console
+gh auth login
+```
 
-* Use `ifbatcc` como o `documentclass` do seu documento.
+- faça o fork do repositório
+```console
+gh repo fork ifbasaj/tcc-template --clone=true
+```
+
+-  edite o arquivo  * Use `ifbatcc` como o `documentclass` do seu documento.
 
 * Tente seguir um dos modelos o mais fielmente possível.
 

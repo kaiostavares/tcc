@@ -207,10 +207,10 @@ grau de \@degree\ em \@course\.}
   \gdef\@pagename{p\'{a}gina}
   \gdef\@colophontext{%
   \urlstyle{rm}%
-  Este volume foi tipografado em \LaTeX\ na classe \textsf{IFBATCC}
-  (\url{https://github.com/ifbasaj/ifbatcc}).
+  Este volume foi tipografado em \LaTeX\ na classe \textsf{IFBATCC}.
   \if\@scr1
-  Para detalhes sobre este documento, clique \Acrobatmenu{GeneralInfo}{aqui}.
+  \newline Para detalhes sobre este documento, clique 
+  \href{https://github.com/ifbasaj/tcc-template}{aqui}
   \fi}
 % English
 \else\if\@language1
@@ -233,10 +233,10 @@ grau de \@degree\ em \@course\.}
   \gdef\@pagename{page}
   \gdef\@colophontext{%
   \urlstyle{rm}%
-  This volume has been typeset in \LaTeX with the \textsf{IFBATCC} class
-  (\url{https://github.com/ifbasaj/ifbatcc}).
+  This volume has been typeset in \LaTeX with the \textsf{IFBATCC} class.
   \if\@scr1
-  For details about this document, click \Acrobatmenu{GeneralInfo}{here}. 
+  \newline For details about this document, click
+  \href{https://github.com/ifbasaj/tcc-template}{here}
   \fi}
 \fi\fi
 
