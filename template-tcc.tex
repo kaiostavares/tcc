@@ -34,6 +34,9 @@
 \usepackage{nomencl}
 \makenomenclature
 
+\renewcommand{\nomname}{\listabbreviationsname}
+\renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
+
 
 %% Preâmbulo:
 %% coloque aqui o seu preambulo LaTeX, i.e., declaração de pacotes,
@@ -159,12 +162,15 @@ DIGITE AS PALAVRAS-CHAVE AQUI
 % Comente para ocultar
 \listoftables
 
-\newcommand{\listadesiglasname}{LISTA DE ABREVIATURAS E SIGLAS}
-\renewcommand{\nomname}{\listadesiglasname}
-\renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
+% Lista de Listagem de código
+% Comente para ocultar
+\lstlistoflistings
 \printnomenclature[3cm]
+
 \cleardoublepage
-\nomenclature{ADS}{Análise e Desenvolvimento de Sistemas}
+
+
+
 
 %%
 %% Parte textual
@@ -200,10 +206,54 @@ Phasellus urna nulla, laoreet in imperdiet a, porttitor eu nibh. Phasellus ac ar
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac tellus turpis. Donec vitae lorem odio. Sed luctus vestibulum libero eget pellentesque. Vivamus in mi turpis. Donec molestie feugiat sollicitudin. Nam et eleifend tortor. Cras lacinia, magna in tristique consequat, urna lorem placerat odio, id viverra mi nulla nec sem. Ut imperdiet, felis a hendrerit imperdiet, velit metus eleifend diam, ut convallis neque augue vitae leo. Morbi condimentum rhoncus faucibus. Fusce elit justo, semper lobortis blandit sed, lacinia et ligula. Pellentesque elit magna, vestibulum vitae adipiscing in, tincidunt eu erat. Nullam eu lectus vel nunc eleifend consectetur. Phasellus faucibus blandit nisi, eget fermentum erat tincidunt et. Aliquam ullamcorper varius nunc, nec eleifend dolor porttitor eu. Etiam eget nunc eu erat facilisis consequat sed accumsan urna. Nam vitae eros et justo iaculis gravida in sed nisl. Donec auctor gravida ipsum. Morbi sed ipsum tortor, quis ornare purus.
 
+ADS \nomenclature{ADS}{Análise e Desenvolvimento de Sistemas} para definição de termo
 
 Veja o código \ref{lst:javateste}  que mostra um exemplo.
 
 \lstinputlisting[language=java,label=lst:javateste,caption=Exemplo de uso do codigo java em arquivo externo]{code/Teste.java}
+
+Agora um exemplo de \enquote{UML} com referencia na Figura~\ref{fig:uml} 
+
+\begin{figure}[htbp]
+  \begin{center}
+    \resizebox {0.7\textwidth} {!} {
+      \begin{tikzpicture}
+
+        \umlclass[x=-10]{Cliente}{}{}
+        
+        \umlclass[x=-5]{Component}{}
+        {
+        + operation(): void\\
+        + add(comp : Component): void\\
+        + remove(comp : Component): void\\
+        + get(id : int): Component\\
+        }
+        
+        \umlclass[x=-8,y=-4]{Leaf}{}
+        {
+        + operation(): void\\
+        }
+        
+        \umlclass[y=-4]{Composite}{}
+        {
+        + operation(): void\\
+        + add(comp : Component): void\\
+        + remove(comp : Component): void\\
+        + get(id : int): Component\\
+        }
+        
+        \umlHVHdep{Cliente}{Component}
+        \umlinherit[geometry=|-|]{Leaf}{Component}
+        \umlinherit[geometry=|-|]{Composite}{Component}
+        \umluniaggreg[geometry=|-,anchor1=50]{Composite}{Component}
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
+  \caption{Exemplo de UML usando utilizando tikz-uml.}
+  \label{fig:uml}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,6 +322,10 @@ A Tabela \ref{tabela:livros} mostra, de forma fictícia, alguns livros contidos 
 % \include{apendice2}
 % ...
 % \include{apendiceM}
+
+
+
+
 
 
 % Bibliografia

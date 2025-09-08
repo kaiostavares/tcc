@@ -101,14 +101,20 @@
 \RequirePackage{textcase}
 \RequirePackage{textcomp}
 \RequirePackage{url}
+\RequirePackage{xcolor}
+\RequirePackage{csquotes}
 \RequirePackage{listings}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \lstset{
+    captionpos=b,
     basicstyle=\ttfamily\footnotesize,
-    numberstyle=\footnotesize,
+    numberstyle=\tiny\color{codegray},
     numbers=left,
-    backgroundcolor=\color{gray!10},
+    backgroundcolor=\color{backcolour},
     frame=single,
-    tabsize=2,
+    showtabs=false,
+    tabsize=4,
     rulecolor=\color{black!30},
     keywordstyle=\color{blue},
     showstringspaces=false,
@@ -152,6 +158,7 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{shapes.geometric,arrows,shadows,shadows.blur,shapes,positioning}
+\RequirePackage{tikz-uml}
 \RequirePackage{xspace}
 \RequirePackage[table,xcdraw]{xcolor}
 \if\@style1
@@ -184,6 +191,12 @@
 
 \if\@language0
 \renewcommand{\lstlistingname}{Listagem}
+\renewcommand{\lstlistlistingname}{Listagens}
+\newcommand{\listabbreviationsname}{LISTA DE ABREVIATURAS E SIGLAS}
+\fi
+
+\if\@language1
+\newcommand{\listabbreviationsname}{Abbreviations}
 \fi
 
 \graphicspath{{imgs/}}

@@ -1,3 +1,141 @@
 {
-    "latex-workshop.latex.outDir": "./out"
+    // Coloca todos os arquivos de saída (pdf, aux, log, etc.) em um diretório 'out'
+    "latex-workshop.latex.outDir": "./out",
+
+    // Ferramentas de compilação disponíveis
+    "latex-workshop.latex.tools": [
+        {
+            // Ferramenta latexmk (altamente recomendada)
+            // -pdf: Gera PDF
+            // -outdir=: Especifica o diretório de saída
+            // -synctex=1: Habilita a sincronização entre o código e o PDF
+            // -interaction=nonstopmode: Não para a compilação em caso de erros simples
+            // -file-line-error: Mostra erros com nome de arquivo e linha
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        },
+        {
+            // Ferramenta pdflatex otimizada
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ]
+        },
+        {
+            // Ferramenta para criar Nomenclaturas (pacote nomencl)
+            "name": "makeindex-nomencl",
+            "command": "makeindex",
+            "args": [
+                "%OUTDIR%/%DOCFILE%.nlo",
+                "-s",
+                "nomencl.ist",
+                "-o",
+                "%OUTDIR%/%DOCFILE%.nls"
+            ],
+            // Especifica que esta ferramenta deve rodar no diretório de saída
+            "cwd": "%OUTDIR%"
+        },
+        {
+            // Ferramenta genérica para criar Índices (pacote makeidx)
+            "name": "makeindex-general",
+            "command": "makeindex",
+            "args": [
+                "%DOCFILE%.idx"
+            ],
+            "cwd": "%OUTDIR%"
+        },
+        {
+            // Ferramenta para bibliografia com Biber (moderno)
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "cwd": "%OUTDIR%"
+        },
+        {
+            // Ferramenta para bibliografia com BibTeX (tradicional)
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "cwd": "%OUTDIR%"
+        }
+    ],
+
+    // Sequências de compilação (receitas)
+    "latex-workshop.latex.recipes": [
+        //{
+        //    // Receita padrão e recomendada usando latexmk
+        //    "name": "latexmk",
+        //    "tools": [
+        //        "latexmk"
+        //    ]
+        //},
+        //{
+        //    // Sua receita original, ajustada para usar a ferramenta de nomenclatura
+        //    "name": "pdflatex ➞ makeindex (nomencl) ➞ pdflatex",
+        //    "tools": [
+        //        "pdflatex",
+        //        "makeindex-nomencl",
+        //        "pdflatex"
+        //    ]
+        //},
+        {
+            // Receita completa com Bibliografia (Biber) e Nomenclatura
+            "name": "pdflatex ➞ bibtex ➞ makeindex (nomencl) ➞ pdflatex ✕ 2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "makeindex-nomencl",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+
+    // Para garantir que a limpeza (Clean) também remova o diretório de saída
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk",
+        "*.snm",
+        "*.nav",
+        "*.synctex.gz",
+        "*.vrb",
+        "*.nlo", // Adicionado
+        "*.nls"  // Adicionado
+    ],
+    // Comando para limpeza
+    "latex-workshop.latex.clean.subfolder.enabled": true
 }
