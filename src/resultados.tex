@@ -1,0 +1,230 @@
+\xchapter{Resultados e Discussões}{}
+\label{cap:resultados}
+
+Esta seção apresenta e discute os resultados obtidos a partir da aplicação dos prompts de auditoria de conformidade nos três cenários analisados: \textit{backend}, \textit{frontend} e \textit{all} (repositório completo). As métricas de avaliação utilizadas foram: acurácia estrita, taxa de omissão, precisão, recall e F1-score, todas conforme os princípios estabelecidos na metodologia.
+
+\section{Análise por Cenário}
+
+Os dados analisados referem-se exclusivamente aos casos de teste cujo gabarito era “\texttt{Implemented}” ou “\texttt{Unknown}”, por serem os únicos rótulos corretos esperados para os requisitos avaliados. Cada linha de resposta dos modelos foi avaliada em função de sua correspondência com esses gabaritos, resultando nos seguintes componentes estatísticos:
+
+\begin{itemize}
+    \item \textbf{Verdadeiros Positivos (VP)}: respostas em que o modelo classificou corretamente o requisito (como \texttt{Implemented} ou \texttt{Unknown}).
+    \item \textbf{VP-Estrito}: subconjunto dos verdadeiros positivos em que, além da classificação correta, a justificativa apresentada também estava tecnicamente correta, coerente e baseada em evidência observável no código.
+    \item \textbf{Falsos Positivos (FP)}: casos em que o modelo classificou como implementado algo que não estava implementado, ou como conhecido algo que era desconhecido.
+    \item \textbf{Falsos Negativos (FN)}: requisitos que estavam implementados ou presentes no repositório, mas foram classificados como ausentes ou ignorados pelo modelo.
+\end{itemize}
+
+A partir desses componentes, foram calculadas as seguintes métricas, todas com base na variante \textbf{estrita} (ou seja, utilizando o \textit{VP-Estrito} como base para os acertos):
+
+\begin{itemize}
+    \item \textbf{Acurácia Estrita}: razão entre os \textit{VP-Estritos} e o total de casos avaliados.
+    \item \textbf{Precisão}: proporção de acertos entre todas as respostas positivas fornecidas pelo modelo: $\text{Precisão} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FP}}$.
+    \item \textbf{Recall}: proporção de acertos entre todos os casos que deveriam ter sido classificados como positivos: $\text{Recall} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FN}}$.
+    \item \textbf{F1-score}: média harmônica entre precisão e recall, usada para balancear os dois extremos: $\text{F1} = \frac{2 \cdot \text{Precisão} \cdot \text{Recall}}{\text{Precisão} + \text{Recall}}$.
+    \item \textbf{Taxa de Omissão}: percentual de requisitos para os quais o modelo não emitiu qualquer julgamento, representando um fator crítico de cobertura analítica.
+\end{itemize}
+
+Cabe ressaltar que a acurácia estrita se mostra particularmente relevante neste contexto, pois desconsidera acertos cujas justificativas fornecidas pelo modelo estavam incorretas ou inconsistentes, privilegiando, assim, apenas as respostas que apresentaram julgamento técnico fundamentado. Já a taxa de omissão evidencia a tendência dos modelos em ignorar ou não processar determinados requisitos, comprometendo a completude e a rastreabilidade da análise.
+
+As subseções a seguir apresentam os resultados detalhados para cada um dos cenários avaliados.
+
+\subsection{Cenário Backend}
+
+As Tabelas \ref{tab:backend-a} e \ref{tab:backend-b} apresentam os resultados para os testes realizados sobre funcionalidades de backend, considerando métricas estritas de avaliação.
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{backend} — (a) Acurácia e Taxa de Omissão}
+\label{tab:backend-a}
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{Id} & \textbf{Agente} & \textbf{Acurácia} & \textbf{Tx.Omissão} \\
+\hline
+1 & Gemini\_CLI(Gemini\_Pro-2{.}5) V1 & 50{,}00\% & 0{,}00\% \\
+2 & Gemini\_CLI(Gemini\_Pro-2{.}5) V2 & 95{,}45\% & 0{,}00\% \\
+\hline
+3 & Copilot(Claude\_Sonnet-4) V1      & 57{,}14\% & 36{,}36\% \\
+4 & Copilot(Claude\_Sonnet-4) V2      & 90{,}91\% & 0{,}00\% \\
+\hline
+5 & Copilot(Gemini\_Pro-2{.}5) V1     & 54{,}55\% & 0{,}00\% \\
+6 & Copilot(Gemini\_Pro-2{.}5) V2     & 68{,}18\% & 0{,}00\% \\
+\hline
+7 & Copilot(GPT-5) V1                 & 86{,}36\% & 0{,}00\% \\
+8 & Copilot(GPT-5) V2                 & 90{,}91\% & 0{,}00\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{backend} — (b) Precisão, Recall e F1-Score}
+\label{tab:backend-b}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Id} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+\hline
+1 & 78{,}57\% & 61{,}11\% & 68{,}75\% \\
+2 & 100{,}00\%& 95{,}45\% & 97{,}67\% \\
+\hline
+3 & 72{,}73\% & 66{,}67\% & 69{,}57\% \\
+4 & 90{,}91\% & 90{,}91\% & 90{,}91\% \\
+\hline
+5 & 100{,}00\%& 85{,}71\% & 92{,}31\% \\
+6 & 100{,}00\%& 78{,}95\% & 88{,}24\% \\
+\hline
+7 & 100{,}00\%& 86{,}36\% & 92{,}68\% \\
+8 & 90{,}91\% & 90{,}91\% & 90{,}91\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+No caso do Gemini CLI, observa-se um salto expressivo na acurácia estrita, de 50,00\% para 95,45\% com o Prompt V2, mantendo a taxa de omissão em 0,00\%. Essa melhoria também se refletiu nas demais métricas: a precisão passou de 78,57\% para 100,00\%, o recall subiu de 61,11\% para 95,45\%, e o F1-score foi de 68,75\% para 97,67\%. Esses dados indicam que o refinamento do prompt contribuiu significativamente para julgamentos mais corretos e consistentes.
+
+O Claude Sonnet-4, operando via Copilot, apresentou avanços igualmente notáveis: a acurácia estrita evoluiu de 57,14\% para 90,91\%, com uma queda acentuada na taxa de omissão (de 36,36\% para 0,00\%). A precisão subiu de 72,73\% para 90,91\%, e o recall de 66,67\% para 90,91\%, resultando em um F1-score equilibrado de 90,91\% no Prompt V2 — evidenciando estabilidade e assertividade no julgamento dos requisitos.
+
+Já o Copilot com Gemini Pro 2.5 teve comportamento misto: apesar de sua acurácia estrita subir de 54,55\% para 68,18\%, e o recall apresentar leve queda (de 85,71\% para 78,95\%), tanto a precisão (100,00\% em ambos os prompts) quanto o F1-score (92,31\% para 88,24\%) se mantiveram em patamares elevados, indicando boa capacidade de identificação correta com justificativas plausíveis.
+
+Por fim, o Copilot com GPT-5 destacou-se pela consistência: com acurácias estritas de 86,36\% e 90,91\%, precisão de 100,00\% e 90,91\%, recall de 86,36\% em ambos os prompts e F1-scores de 92,68\% e 90,91\%, respectivamente. Esses resultados reforçam seu desempenho robusto e confiável nas tarefas de backend, mesmo com a mudança de prompt.
+
+
+\subsection{Cenário Frontend}
+
+Conforme exibido nas Tabelas \ref{tab:frontend-a} e \ref{tab:frontend-b}, os resultados do cenário \textit{frontend} reforçam a superioridade do Prompt V2 em termos de precisão e cobertura, especialmente na redução das omissões e no aumento da consistência das justificativas.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{frontend} — (a) Acurácia e Taxa de Omissão}
+\label{tab:frontend-a}
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{Id} & \textbf{Agente} & \textbf{Acurácia} & \textbf{Tx.Omissão} \\
+\hline
+1 & Gemini\_CLI(Gemini\_Pro-2{.}5) V1 & 63{,}64\% & 0{,}00\% \\
+2 & Gemini\_CLI(Gemini\_Pro-2{.}5) V2 & 81{,}82\% & 0{,}00\% \\
+\hline
+3 & Copilot(Claude\_Sonnet-4) V1      & 69{,}23\% & 40{,}91\% \\
+4 & Copilot(Claude\_Sonnet-4) V2      & 93{,}33\% & 31{,}82\% \\
+\hline
+5 & Copilot(Gemini\_Pro-2{.}5) V1     & 20{,}00\% & 31{,}82\% \\
+6 & Copilot(Gemini\_Pro-2{.}5) V2     & 81{,}82\% & 0{,}00\% \\
+\hline
+7 & Copilot(GPT-5) V1                 & 95{,}45\% & 0{,}00\% \\
+8 & Copilot(GPT-5) V2                 & 95{,}45\% & 0{,}00\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{frontend} — (b) Precisão, Recall e F1-Score}
+\label{tab:frontend-b}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Id} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+\hline
+1 & 87{,}50\% & 63{,}64\% & 73{,}68\% \\
+2 & 85{,}71\% & 81{,}82\% & 83{,}72\% \\
+\hline
+3 & 100{,}00\% & 69{,}23\% & 81{,}82\% \\
+4 & 100{,}00\% & 93{,}33\% & 96{,}55\% \\
+\hline
+5 & 100{,}00\% & 23{,}08\% & 37{,}50\% \\
+6 & 94{,}74\% & 85{,}71\% & 90{,}00\% \\
+\hline
+7 & 100{,}00\% & 95{,}45\% & 97{,}67\% \\
+8 & 100{,}00\% & 95{,}45\% & 97{,}67\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+O Gemini CLI apresentou uma evolução consistente com o Prompt V2: a acurácia estrita subiu de 63,64\% para 81,82\%, acompanhada de um aumento no F1-score (de 73,68\% para 83,72\%), mesmo com uma leve redução na precisão. Isso indica maior capacidade de identificação correta, ainda que com pequenas perdas em especificidade.
+
+O Claude Sonnet-4, integrado ao Copilot, obteve uma das melhores evoluções do conjunto. A precisão permaneceu em 100\% nas duas rodadas, mas o recall passou de 69,23\% para 93,33\%, refletindo um aumento expressivo de cobertura. Consequentemente, o F1-score saltou de 81,82\% para 96,55\%, com redução da taxa de omissão de 40,91\% para 31,82\%. Esses dados reforçam o impacto positivo do Prompt V2 em expandir a análise sem comprometer a qualidade.
+
+Já o Copilot com Gemini Pro-2.5 mostrou o caso mais dramático de recuperação: a acurácia estrita saiu de apenas 20,00\% no Prompt V1 para 81,82\% no Prompt V2. O F1-score também subiu de 37,50\% para 90,00\%, demonstrando que o prompt anterior limitava drasticamente a capacidade inferencial do modelo, sobretudo no frontend. A taxa de omissão, por sua vez, caiu de 31,82\% para 0,00\%.
+
+Por fim, o Copilot com GPT-5 manteve um desempenho exemplar e estável: acurácia de 95,45\%, precisão de 100\%, recall de 95,45\% e F1-score de 97,67\%, tanto com o Prompt V1 quanto com o V2. A ausência de omissões e a manutenção das métricas elevadas evidenciam sua robustez, mesmo sem ajustes adicionais de engenharia de prompt.
+
+No contexto da camada de apresentação, o Prompt V2 mostrou-se decisivo para aumentar não apenas a assertividade, mas também a disposição dos modelos em emitir julgamentos completos, como demonstrado pela queda geral nas taxas de omissão e pela elevação dos F1-scores.
+
+
+\subsection{Cenário Completo (All)}
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{completo (all)} — (a) Acurácia e Taxa de Omissão}
+\label{tab:all-a}
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{Id} & \textbf{Agente} & \textbf{Acurácia} & \textbf{Tx.Omissão} \\
+\hline
+1 & Gemini\_CLI(Gemini\_Pro-2{.}5) V1 & 30{,}77\% & 40{,}91\% \\
+2 & Gemini\_CLI(Gemini\_Pro-2{.}5) V2 & 50{,}00\% & 18{,}18\% \\
+\hline
+3 & Copilot(Claude\_Sonnet-4) V1      & 85{,}71\% & 36{,}36\% \\
+4 & Copilot(Claude\_Sonnet-4) V2      & 85{,}00\% & 9{,}09\% \\
+\hline
+5 & Copilot(Gemini\_Pro-2{.}5) V1     & 41{,}67\% & 45{,}45\% \\
+6 & Copilot(Gemini\_Pro-2{.}5) V2     & 50{,}00\% & 0{,}00\% \\
+\hline
+7 & Copilot(GPT-5) V1                 & 63{,}64\% & 0{,}00\% \\
+8 & Copilot(GPT-5) V2                 & 63{,}64\% & 0{,}00\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre Prompt V1 e V2 no cenário \textit{completo (all)} — (b) Precisão, Recall e F1-Score}
+\label{tab:all-b}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Id} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+\hline
+1 & 100{,}00\% & 44{,}44\% & 61{,}54\% \\
+2 & 100{,}00\% & 69{,}23\% & 81{,}82\% \\
+\hline
+3 & 100{,}00\% & 92{,}31\% & 96{,}00\% \\
+4 & 94{,}44\%  & 85{,}00\% & 89{,}47\% \\
+\hline
+5 & 100{,}00\% & 41{,}67\% & 58{,}82\% \\
+6 & 61{,}11\%  & 52{,}38\% & 56{,}41\% \\
+\hline
+7 & 66{,}67\%  & 63{,}64\% & 65{,}12\% \\
+8 & 66{,}67\%  & 63{,}64\% & 65{,}12\% \\
+\hline
+\end{tabular}
+\vspace{0.8em}
+\end{table}
+
+O cenário mais desafiador da análise envolvendo todo o repositório, exigiu que os modelos identificassem autonomamente os arquivos relevantes, sem uma delimitação explícita de escopo. Como esperado, isso resultou em menores taxas de acurácia e maior variação nos desempenhos entre os agentes.
+
+O Gemini CLI apresentou uma evolução significativa com o Prompt V2: sua acurácia estrita subiu de 30,77\% para 50,00\% e a taxa de omissão caiu de 40,91\% para 18,18\%. Além disso, o F1-score melhorou de 61,54\% para 81,82\%, indicando que o modelo, mesmo diante do desafio de localizar implementações dispersas, aumentou sua efetividade com o prompt refinado.
+
+O Claude Sonnet-4 manteve alto desempenho nas duas versões de prompt, com F1-scores elevados (96,00\% no V1 e 89,47\% no V2). Embora a precisão tenha diminuído levemente no V2 (de 100\% para 94,44\%), o recall manteve-se alto, e a taxa de omissão caiu de 36,36\% para apenas 9,09\%, revelando uma maior propensão à tomada de decisão com base em evidências amplas.
+
+Já o Copilot com Gemini Pro apresentou comportamento misto: a acurácia subiu de 41,67\% para 50,00\%, e a omissão foi eliminada no Prompt V2. Contudo, a precisão caiu de 100,00\% para 61,11\%, e o F1-score ficou em 56,41\% — uma queda em relação ao V1 (58,82\%), indicando que o modelo passou a se arriscar mais, mas com menos assertividade.
+
+O Copilot com GPT-5 manteve desempenho estável entre os dois prompts, com F1-score constante em 65,12\%, precisão de 66,67\% e recall de 63,64\%, e nenhuma omissão em ambos os casos. Esse equilíbrio pode indicar uma limitação intrínseca do modelo em lidar com repositórios amplos, mesmo com o suporte de prompts aprimorados.
+
+Em síntese, o cenário "All" evidenciou que a engenharia de prompt tem impacto direto na capacidade dos modelos em navegar contextos extensos e localizar implementações corretas. Modelos como Claude Sonnet-4 e Gemini CLI demonstraram melhor adaptação a esse desafio, enquanto os demais apresentaram oscilações mais expressivas nas métricas de recall e F1-score.
+
+\section{Síntese dos Resultados}
+
+De maneira geral, os resultados indicam que a engenharia de prompt refinada (versão V2) foi determinante para o aumento da precisão e da completude das respostas dos modelos, sobretudo nos cenários isolados de backend e frontend. Nesses contextos restritos, a limitação do escopo facilitou a tarefa de localização de evidências no código, permitindo que os modelos — como o Claude Sonnet-4 e o Gemini CLI — apresentassem melhorias substanciais em acurácia estrita e redução da taxa de omissão. Tais avanços reforçam a importância de fornecer instruções mais claras, estruturadas e contextualizadas para maximizar a efetividade dos modelos de linguagem.
+
+Entretanto, no cenário completo (\textit{All}), os modelos ainda enfrentam desafios consideráveis relacionados à identificação de artefatos relevantes em meio a um repositório extenso e heterogêneo. Isso evidencia a necessidade de avanços não apenas na formulação dos prompts, mas também em mecanismos de indexação, filtragem e priorização dos arquivos disponíveis na janela de contexto. Modelos como o Claude Sonnet-4 e o Gemini CLI demonstraram melhor adaptação a esse cenário ampliado, enquanto outros sofreram quedas relevantes de desempenho ou mantiveram-se estáveis com limitações.
+
+A acurácia estrita, por seu rigor metodológico, confirma-se como a métrica mais confiável para avaliar a efetividade da auditoria automatizada, uma vez que exige que o modelo acerte não apenas a classificação do requisito, mas também a justificativa técnica correspondente. No entanto, uma análise completa exige observar outras métricas complementares.
+
+A precisão estrita revelou o grau de assertividade dos modelos ao classificarem implementações corretas sem emitir falsos positivos. Modelos como Claude Sonnet-4 e Copilot com GPT-5 atingiram 100\% de precisão em vários contextos, demonstrando capacidade de responder apenas quando há evidência clara. Por outro lado, o aumento da precisão em alguns casos foi acompanhado de queda no recall estrito, o que indica uma tendência à cautela excessiva, deixando de identificar requisitos válidos.
+
+O recall estrito, por sua vez, foi fundamental para medir a abrangência da análise. Ele destacou os modelos que, mesmo em contextos amplos, foram capazes de localizar e justificar corretamente a maioria dos requisitos.
+
+Por fim, o F1-score estrito — métrica harmônica entre precisão e recall — sintetizou de forma equilibrada a performance geral dos modelos. Valores elevados acima de 90\% foram observados principalmente nos cenários com escopo reduzido, reforçando que ambientes mais controlados favorecem auditorias mais eficazes. Já nos testes sobre o repositório completo, mesmo modelos robustos apresentaram queda no F1-score, evidenciando os desafios da análise em larga escala.
+
+Em suma, os experimentos demonstraram que o refinamento dos prompts tem impacto direto na qualidade das auditorias automatizadas realizadas por LLMs, com reflexos significativos em todas as métricas de avaliação. A combinação de alta acurácia, precisão, recall e F1-score, associada a baixas taxas de omissão, constitui o padrão ideal de desempenho para aplicações práticas em verificação de conformidade de software.

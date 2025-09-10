@@ -618,7 +618,7 @@ grau de \@degree\ em \@course\.}
   \sf\large
   \textbf{%
     INSTITUTO FEDERAL DE EDUCAÇÃO,\\CIÊNCIA E TECNOLOGIA DA BAHIA\\
-    {\it Campus} Santo Antônio de Jesus
+     Campus Santo Antônio de Jesus
   }
   \vskip 25mm
   \textbf{\MakeTextUppercase{\@texttype}}
