@@ -104,6 +104,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{csquotes}
 \RequirePackage{listings}
+\RequirePackage{xurl}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \lstset{
