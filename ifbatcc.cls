@@ -100,7 +100,6 @@
 \RequirePackage{ifthen}
 \RequirePackage{textcase}
 \RequirePackage{textcomp}
-\RequirePackage{url}
 \RequirePackage{xcolor}
 \RequirePackage{csquotes}
 \RequirePackage{listings}
