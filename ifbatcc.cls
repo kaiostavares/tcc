@@ -174,7 +174,14 @@
 \if\@scr1
   \RequirePackage{graphicx}
   %\RequirePackage[dvips,usenames]{color}
-  \RequirePackage[colorlinks,backref]{hyperref}
+  \RequirePackage[backref]{hyperref}
+  \hypersetup{
+    colorlinks=true, % Ativa a coloração dos links
+    linkcolor=black,   % Define a cor dos links de texto (referências cruzadas)
+    citecolor=black,  % Define a cor das citações
+    urlcolor=black   % Define a cor das URLs
+  }
+
 \fi
 \RequirePackage[alf]{abntex2cite}
 %\RequirePackage{abntex2}
@@ -190,8 +197,8 @@
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \if\@language0
-\renewcommand{\lstlistingname}{Listagem}
-\renewcommand{\lstlistlistingname}{Listagens}
+\renewcommand{\lstlistingname}{Algoritmo}
+\renewcommand{\lstlistlistingname}{LISTA DE ALGORITMO}
 \newcommand{\listabbreviationsname}{LISTA DE ABREVIATURAS E SIGLAS}
 \fi
 
