@@ -22,10 +22,6 @@ O percurso metodológico deste trabalho foi fundamentado em um processo iterativ
     \item \textbf{Coleta e Análise dos Resultados:} Por fim, todas as respostas geradas foram sistematicamente registradas, categorizadas e avaliadas. As análises abrangeram a validação das respostas e a medição da acurácia, taxa de omissão, precisão, \textit{recall} e \textit{F1-score}. Essas métricas foram utilizadas por serem amplamente reconhecidas na literatura como indicadores robustos para avaliar classificadores, permitindo mensurar não apenas a proporção de acertos, mas também a capacidade dos modelos em evitar falsas classificações e identificar corretamente os requisitos relevantes. Os dados foram consolidados em tabelas de desempenho para viabilizar uma interpretação quantitativa e qualitativa do comportamento dos modelos.
 \end{enumerate}
 
-% A utilização de métricas quantitativas revelou-se essencial para avaliar objetivamente o desempenho dos modelos aplicados à verificação automatizada de conformidade entre requisitos e código-fonte. Neste experimento, duas métricas foram particularmente relevantes: a acurácia e a taxa de omissão. A acurácia permite mensurar a proporção de classificações corretas, isto é, em que o modelo atribuiu o rótulo adequado ao requisito analisado, em relação ao total de casos avaliados. Trata-se de uma métrica abrangente, que fornece uma visão geral da performance do modelo, considerando tanto acertos em requisitos implementados quanto corretamente identificados como ausentes. 
-
-% Já a taxa de omissão foi empregada para capturar um tipo específico de falha: situações em que o modelo não forneceu nenhuma resposta em requisitos cuja implementação estava de fato presente no código. Em contextos de engenharia de software, esse tipo de erro pode comprometer significativamente a rastreabilidade e a confiabilidade do processo de auditoria, ao deixar requisitos efetivamente atendidos sem o devido reconhecimento. Assim, a análise combinada da acurácia e da taxa de omissão fornece uma visão crítica sobre a capacidade do modelo de não apenas acertar, mas também de evitar silêncios injustificados diante de evidências válidas.
-
 \subsection{Seleção dos casos de teste.}
 Para condução do experimento, foram selecionados dois documentos de caso de teste provenientes de módulos distintos do sistema. O primeiro corresponde à funcionalidade de geração automatizada de questões com apoio de Inteligência Artificial, a qual envolve tanto componentes de \textit{back-end} quanto de \textit{front-end}, sendo referenciada nos testes como módulo \textbf{IA}. Essa funcionalidade permite que o usuário submeta um documento contendo conteúdo pedagógico ou uma descrição textual, com o objetivo de que a IA extraia automaticamente questões coerentes com o material fornecido e as insira diretamente na base de dados do sistema. Trata-se, portanto, de uma funcionalidade que combina processamento textual, análise semântica e integração com o fluxo de criação de atividades dentro da plataforma.
 
@@ -110,8 +106,9 @@ Com o \textit{prompt} revisado, repetiu-se a bateria de testes sobre os mesmos a
 \section{Experimentação e Evolução dos Prompts de Auditoria}
 
 O processo de análise automatizada iniciou-se com a construção de um prompt-base, concebido para simular o comportamento de um auditor de conformidade de requisitos. 
+
 \begin{minted}[fontsize=\small, breaklines=true, bgcolor=gray!5, linenos]{markdown}
-# Prompt de Auditoria de Requisitos em Código
+  # Prompt de Auditoria de Requisitos em Código
 
 Você é um **auditor de conformidade de requisitos de software**.  
 Sua tarefa é:
@@ -150,38 +147,45 @@ Sua tarefa é:
     "notes": "Incertezas, dependências ou sugestões de arquivos adicionais a revisar."
   }
 ]
-\end{minted} 
+```
+\end{minted}
+\captionof{algorithm}{Prompt inicial para auditoria de conformidade de requisitos (Prompt V1).}
+\label{alg:prompt_v1}
 
-
-Este prompt foi projetado para instruir o modelo de linguagem a executar uma tarefa complexa: analisar requisitos em linguagem natural e verificar sua implementação em artefatos como código-fonte, arquivos de configuração, testes e documentação técnica. O escopo do prompt inicial especificava um conjunto de categorias de classificação — \textit{Implemented}, \textit{Partially Implemented}, \textit{Missing} e \textit{Unknown}, além de requisitar evidências concretas para cada decisão, como o caminho do arquivo, a faixa de linhas e uma justificativa técnica. Além disso, as instruções determinavam que, na ausência de evidências claras, o requisito deveria ser classificado como \textit{Unknown} para evitar inferências subjetivas. 
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{imgs/jsongGeneration.png}
+    \includegraphics[width=0.9\textwidth]{imgs/jsongGeneration.png}
     \caption{Output Json sendo gerado  (Fonte: Própria)}
     \label{fig:json_prompt}
 \end{figure}
 
-Como pode ser visto na Figura ~\ref{fig:json_prompt} acima, as respostas dos modelos foram geradas em formato JSON estruturado, contendo os campos \texttt{requirement\_id}, \texttt{requirement\_text}, \texttt{label}, \texttt{evidence}, \texttt{explanation} e \texttt{notes}. Cada registro JSON correspondia à análise de um requisito específico. Subsequentemente, as respostas foram exportadas e consolidadas em formato tabular, conforme exemplificado na Tabela~\ref{tab:exemplo-resultados}. 
+O prompt foi projetado para instruir o modelo de linguagem a executar uma tarefa complexa: analisar requisitos em linguagem natural e verificar sua implementação em artefatos como código-fonte, arquivos de configuração, testes e documentação técnica. O escopo do prompt inicial especificava um conjunto de categorias de classificação — \textit{Implemented}, \textit{Partially Implemented}, \textit{Missing} e \textit{Unknown}, além de requisitar evidências concretas para cada decisão, como o caminho do arquivo, a faixa de linhas e uma justificativa técnica. Além disso, as instruções determinavam que, na ausência de evidências claras, o requisito deveria ser classificado como \textit{Unknown} para evitar inferências subjetivas. 
+
+
+A Figura ~\ref{fig:json_prompt}, corresponde as respostas dos modelos, as quais foram geradas em formato JSON estruturado, contendo os campos \texttt{requirement\_id}, \texttt{requirement\_text}, \texttt{label}, \texttt{evidence}, \texttt{explanation} e \texttt{notes}. Cada registro JSON correspondia à análise de um requisito específico. Subsequentemente, as respostas foram exportadas e consolidadas em formato tabular, conforme exemplificado na Tabela~\ref{tab:exemplo-resultados}. 
 
 
 \begin{table}[H]
 \centering
-\caption{Exemplo de consolidação das respostas do modelo, Fonte Propia}
+\caption{Exemplo de consolidação das respostas do modelo}
 \label{tab:exemplo-resultados}
-\begin{tabular}{|l|l|l|l|p{5.5cm}|}
+\begin{tabular}{|c|l|c|c|p{5.5cm}|}
 \hline
 \textbf{Requisito} & \textbf{Gold} & \textbf{Pred} & \textbf{Exp. Correta} & \textbf{Observações} \\
 \hline
-REL-RF01 & Implemented & Partially & --- & Arquivo analisado não representa o componente certo \\ 
-REL-RF02 & Implemented & Partially & --- & Não soube validar corretamente \\ 
-REL-RF03 & Implemented & Implemented & Sim & --- \\ 
-REL-RNF01 & Implemented & Implemented & Não & Análise feita apenas do módulo de Back-End \\ 
-REL-RNF02 & Unknown & --- & --- & --- \\ 
-IA-RF01 & Implemented & Missing & --- & Lógica principal da classe foi ignorada \\ 
-IA-RNF03 & Implemented & Implemented & Não & Análise limitada aos atributos da entidade \\ 
-IA-RNF07 & Implemented & Implemented & Sim & --- \\ 
+REL-RF01  & Implemented & Partially   & --- & Arquivo analisado não representa o componente certo \\
+REL-RF02  & Implemented & Partially   & --- & Não soube validar corretamente \\
+\hline
+REL-RF03  & Implemented & Implemented & Sim & --- \\
+REL-RNF01 & Implemented & Implemented & Não & Análise feita apenas do módulo de Back-End \\
+\hline
+REL-RNF02 & Unknown     & ---         & --- & --- \\
+IA-RF01   & Implemented & Missing     & --- & Lógica principal da classe foi ignorada \\
+\hline
+IA-RNF03  & Implemented & Implemented & Não & Análise limitada aos atributos da entidade \\
+IA-RNF07  & Implemented & Implemented & Sim & --- \\
 \hline
 \end{tabular}
 \end{table}
@@ -243,10 +247,15 @@ Exemplos mínimos em formato JSON que demonstram a estrutura esperada da respost
   }
 ]
 \end{minted}
+\captionof{algorithm}{Few-shot prompt com exemplos de respostas}
+\label{alg:prompt_examples}
+
+\vspace{2em}
+
 
 \textbf{Chain-of-thought (CoT).}
 Adicionalmente, o \textit{prompt} instruiu o modelo a seguir um protocolo cognitivo explícito, aumentando a rastreabilidade das conclusões e a consistência entre itens:
-
+\begin{algorithm}
 \begin{minted}[fontsize=\small, breaklines=true, linenos, bgcolor=gray!5]{markdown}
     ## Processo Cognitivo
     
@@ -270,10 +279,14 @@ Adicionalmente, o \textit{prompt} instruiu o modelo a seguir um protocolo cognit
     6. **Justificar sua decisão tecnicamente**, apontando 
        arquivos, linhas e raciocínio.
 \end{minted}
+\caption{Chain-of-thought prompt para análise estruturada}
+\label{alg:prompt_cot}
+\end{algorithm}
 
 A combinação dessas técnicas contribuiu para a obtenção de respostas mais estruturadas, precisas e auditáveis, cujo impacto é analisado no Capítulo~\ref{cap:resultados}.
 
 Prompt V2 completo:
+
 \begin{minted}[fontsize=\small, breaklines=true, linenos, bgcolor=gray!5]{markdown}
 # Prompt de Auditoria de Conformidade de Requisitos em Código-Fonte
 
@@ -367,23 +380,26 @@ Para cada item presente no documento:
     "notes": "Pode estar ausente ou implementado em módulo não incluído no escopo."
   }
 ]
+```
 \end{minted}
-Vale destacar que tanto os agentes utilizados no \textit{Gemini CLI} quanto o \textit{GitHub Copilot} demonstram, em suas respostas, a aplicação implícita da técnica de \textit{chain-of-thought}. Mesmo quando não instruídos diretamente, esses modelos tendem a organizar sua análise de forma hierárquica e explicativa, primeiro interpretando o requisito, depois localizando trechos relevantes no código e, por fim, justificando a decisão tomada. Isso reforça a eficácia dessa abordagem como padrão cognitivo emergente em agentes baseados em modelos de linguagem.
-
-As Figuras~\ref{fig:gemini_cot} e~\ref{fig:copilot_cot} exemplificam esse comportamento, evidenciando como os agentes estruturam suas análises em etapas logicamente encadeadas, mesmo quando expostos a requisitos ambíguos ou contextos parciais.
-
-\vspace{1em}
+\captionof{algorithm}{Versão refinada do prompt de auditoria (Prompt V2).}
+\label{alg:prompt-v2} 
+\vspace{2em}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{imgs/gemini_chain_of_thought.png}
+    \includegraphics[width=1\textwidth]{imgs/gemini_chain_of_thought.png}
     \caption{Raciocínio estruturado (CoT) Gemini CLI, (Fonte: Própria)}
     \label{fig:gemini_cot}
 \end{figure}
 
-\vspace{1em}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{imgs/copilot_chain_of_thought.png}
+    \includegraphics[width=1\textwidth]{imgs/copilot_chain_of_thought.png}
     \caption{Raciocínio estruturado (CoT) Copilot, (Fonte: Própria)}
     \label{fig:copilot_cot}
 \end{figure}
+
+Vale destacar que tanto os agentes utilizados no \textit{Gemini CLI} quanto o \textit{GitHub Copilot} demonstram, em suas respostas, a aplicação implícita da técnica de \textit{chain-of-thought}. Mesmo quando não instruídos diretamente, esses modelos tendem a organizar sua análise de forma hierárquica e explicativa, primeiro interpretando o requisito, depois localizando trechos relevantes no código e, por fim, justificando a decisão tomada. Isso reforça a eficácia dessa abordagem como padrão cognitivo emergente em agentes baseados em modelos de linguagem.
+
+As Figuras~\ref{fig:gemini_cot} e~\ref{fig:copilot_cot} exemplificam esse comportamento, evidenciando como os agentes estruturam suas análises em etapas logicamente encadeadas, mesmo quando expostos a requisitos ambíguos ou contextos parciais.
+

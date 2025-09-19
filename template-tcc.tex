@@ -1,49 +1,27 @@
-%% Template para TCC na classe IFBATCC
-%% versao 1.0
-%% (c) 2021 Antônio Cleber de Sousa Araújo
-%% https://github.com/cleberaraujo/ifbatcc.git
-%% versao 1.1
-%% (c) 2023 Leandro Costa Souza
-%% https://github.com/ifbasaj/tcc-template.git
-
-%% Carrega a classe ifbatcc
-%% Opcoes: * Idiomas
-%%           pt   - português (padrao)
-%%           en   - inglês
-%%         * Tipos de Trabalhos (pelos graus de formação)
-%%           tec  - para TCC de cursos tecnólogos (padrão)
-%%           bsc  - para monografias de graduação
-%%           msc  - para dissertações de mestrado
-%%           qual - exame de qualificação de mestrado
-%%           prop - exame de qualificação de doutorado
-%%           phd  - para teses de doutorado
-%%         * Cursos do IFBA/SAJ
-%%           ads  - Análise e Desenvolvimento de Sistemas
-%%           rde  - Redes de Computadores (padrão)
-%%           mul  - Produção Multimídia
-%%         * Mídia
-%%           scr  - para versão eletrônica (PDF) / consulte o guia do usuário
-%%         * Estilo
-%%           classic - estilo original a la TAOCP (deprecated)
-%%           std     - novo estilo a la CUP (padrão)
-%%         * Paginação
-%%           oneside - para impressão em face única
-%%           twoside - para impressão em frente e verso (padrão)
 \documentclass[tec, ads, scr, classic, a4paper, twoside]{ifbatcc}
 \usepackage[utf8]{inputenc}
 \usepackage{chngcntr}
 \usepackage{float}
+\usepackage{newfloat}
+\usepackage{caption}
+
+\DeclareFloatingEnvironment[
+    fileext=loa,
+    listname={Lista de Algoritmos},
+    name=Algoritmo,
+    placement=H
+]{algorithm}
 
 \usepackage{placeins}
-\usepackage{adjustbox} % no preâmbulo
+\usepackage{adjustbox}
 \usepackage{minted}
 \usepackage{nomencl}
+\usepackage{amsmath}
 \makenomenclature
-
+\input{src/siglas.tex}
 \renewcommand{\nomname}{\listabbreviationsname}
 \renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
 
-% Ajuste das cores de hyperlinks (remove vermelho/verde padrão do hyperref)
 \AtBeginDocument{\hypersetup{hidelinks}}
 
 
@@ -77,6 +55,7 @@
 % Opcao: [f] - para orientadora do sexo feminino
 % e.g. \adviser[f]{Profa. Dra. Maria Santos}
 \adviser{Leandro Costa Souza}
+
 
 %% Inicio do documento
 \begin{document}
@@ -165,41 +144,26 @@ LLM; Requirements Engineering; Automated Verification; Prompt Engineering
 % Lista de tabelas
 % Comente para ocultar
 \listoftables
+\listofalgorithms
 
-% Lista de abreviaturas / nomenclatura
 \printnomenclature[3cm]
 
-%%
-%% Parte textual
-%%
+\cleardoublepage
+
 \mainmatter
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
+\counterwithout{algorithm}{chapter}
 \renewcommand{\thefigure}{\arabic{figure}}
 \renewcommand{\thetable}{\arabic{table}}
-
-% Recomendados criar cada capitulo em um arquivo separado, por exemplo
-% "capitulo1.tex", "capitulo2.tex", ... "capituloN.tex" e depois
-% inclui-los com:
-% \include{capitulo1}
-% \include{capitulo2}
-% ...
-% \include{capituloN}
-%
-% Importante: Use \xchapter ao invés de \chapter, conforme exemplo abaixo.
-%\xchapter{Introdução}{Este é o primeiro capítulo, no qual eu conto toda a história deste trabalho.}
-
+\renewcommand{\thealgorithm}{\arabic{algorithm}} 
 
 \include{src/introducao.tex}
-\include{src/referencial.tex}
+\include{src/engenharia_software.tex}
+\include{src/aprendizado_maquina.tex}
 \include{src/desenvolvimento.tex}   
 \include{src/resultados.tex}
 \include{src/conclusao.tex}
-
-
-
-
-
 %%
 %% Parte pós-textual
 %%
@@ -209,13 +173,6 @@ LLM; Requirements Engineering; Automated Verification; Prompt Engineering
 % Comente se não houver apêndices
 \appendix
 
-% É aconselhável criar cada apêndice em um arquivo separado, exemplo
-% "apendice1.tex", "apendice.tex", ... "apendiceM.tex" e depois
-% inclui--los com:
-% \include{apendice1}
-% \include{apendice2}
-% ...
-% \include{apendiceM}
 
 
 % Bibliografia

@@ -17,13 +17,25 @@ Os dados analisados referem-se exclusivamente aos casos de teste cujo gabarito e
 A partir desses componentes, foram calculadas as seguintes métricas, todas com base na variante \textbf{estrita} (ou seja, utilizando o \textit{VP-Estrito} como base para os acertos):
 
 \begin{itemize}
-    \item \textbf{Acurácia Estrita}: razão entre os \textit{VP-Estritos} e o total de casos avaliados.
-    \item \textbf{Precisão}: proporção de acertos entre todas as respostas positivas fornecidas pelo modelo: $\text{Precisão} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FP}}$.
-    \item \textbf{Recall}: proporção de acertos entre todos os casos que deveriam ter sido classificados como positivos: $\text{Recall} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FN}}$.
-    \item \textbf{F1-score}: média harmônica entre precisão e recall, usada para balancear os dois extremos: $\text{F1} = \frac{2 \cdot \text{Precisão} \cdot \text{Recall}}{\text{Precisão} + \text{Recall}}$.
+    \item \textbf{Acurácia Estrita}: razão entre os \textit{verdadeiros positivos estritos (VP-Estritos)} e o total de casos avaliados.
+    
+    \item \textbf{Precisão}: proporção de acertos entre todas as respostas positivas fornecidas pelo modelo:
+    \begin{equation}
+        \text{Precisão} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FP}}
+    \end{equation}
+    
+    \item \textbf{Recall}: proporção de acertos entre todos os casos que deveriam ter sido classificados como positivos:
+    \begin{equation}
+        \text{Recall} = \frac{\text{VP-Estrito}}{\text{VP-Estrito} + \text{FN}}
+    \end{equation}
+    
+    \item \textbf{F1-score}: média harmônica entre a precisão e o recall, usada para balancear os dois extremos:
+    \begin{equation}
+        \text{F1-score} = \frac{2 \cdot \text{Precisão} \cdot \text{Recall}}{\text{Precisão} + \text{Recall}}
+    \end{equation}
+        
     \item \textbf{Taxa de Omissão}: percentual de requisitos para os quais o modelo não emitiu qualquer julgamento, representando um fator crítico de cobertura analítica.
 \end{itemize}
-
 Cabe ressaltar que a acurácia estrita se mostra particularmente relevante neste contexto, pois desconsidera acertos cujas justificativas fornecidas pelo modelo estavam incorretas ou inconsistentes, privilegiando, assim, apenas as respostas que apresentaram julgamento técnico fundamentado. Já a taxa de omissão evidencia a tendência dos modelos em ignorar ou não processar determinados requisitos, comprometendo a completude e a rastreabilidade da análise.
 
 As subseções a seguir apresentam os resultados detalhados para cada um dos cenários avaliados.

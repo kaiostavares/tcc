@@ -13,3 +13,6 @@ template-tcc.pdf
 template-tcc.synctex.gz
 template-tcc.toc
 texput.log
+
+# MacOS
+.DS_Store
