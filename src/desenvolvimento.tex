@@ -1,24 +1,24 @@
 \xchapter{Desenvolvimento}{}
 
 \section{Abordagem Geral}
-Este trabalho adota uma abordagem de natureza aplicada e qualitativa, fundamentada em um experimento controlado com artefatos de um software real. O objetivo central consiste em investigar a eficácia de Modelos de Linguagem de Larga Escala  na verificação automatizada da conformidade entre requisitos, expressos em linguagem natural, e sua respectiva implementação no código-fonte. A metodologia proposta segue um fluxo estruturado que compreende a extração de arquivos de um repositório Git, a construção e o refinamento de prompts e, por conseguinte, a aplicação destes a diferentes modelos de linguagem por meio da ferramenta Gemini CLI e do GitHub Copilot integrado ao Visual Studio Code. As atividades foram conduzidas em um projeto concreto — o sistema “Nivelamento Online”, desenvolvido pela empresa Exatamente Soluções Educacionais, o que confere realismo e aplicabilidade prática à análise. Nesse contexto, busca-se avaliar a precisão das inferências geradas pelos modelos, os efeitos da engenharia de prompt e o impacto de distintas arquiteturas e configurações sobre a qualidade da verificação.
+Este trabalho adota uma abordagem de natureza aplicada e qualitativa, fundamentada em um experimento controlado com artefatos de um software real. O objetivo central consiste em investigar a eficácia de Modelos de Linguagem de Larga Escala  na verificação automatizada da conformidade entre requisitos, expressos em linguagem natural, e sua respectiva implementação no código-fonte. A metodologia proposta segue um fluxo estruturado que compreende a extração de arquivos de um repositório Git, a construção e o refinamento de prompts e, por conseguinte, a aplicação destes a diferentes modelos de linguagem por meio da ferramenta Gemini CLI e do GitHub Copilot integrado ao Visual Studio Code. As atividades foram conduzidas no sistema “Nivelamento Online”, desenvolvido pela empresa Exatamente Soluções Educacionais, o que confere realismo e aplicabilidade prática à análise. Nesse contexto, busca-se avaliar a precisão das inferências geradas pelos modelos, os efeitos da engenharia de prompt e o impacto de distintas arquiteturas e configurações sobre a qualidade da verificação.
 
 \section{Caracterização do Sistema sob Estudo}
 
 O \textit{Nivelamento Online} (NiO) é uma plataforma educacional gamificada desenvolvida para apoiar o reforço de conteúdos escolares por meio de quizzes e atividades interativas. O sistema oferece modos de uso individual e coletivo, com funcionalidades voltadas tanto ao aluno quanto ao professor, incluindo a criação de perguntas, acompanhamento de desempenho e recursos de motivação baseados em mecânicas de jogo. 
 
-Sua implementação adota a estrutura de múltiplos projetos, sendo os módulos de front-end e back-end os princiapis, além desses o repositório inclui outros componentes auxiliares relacionados à operação da plataforma. O front-end é construído como uma aplicação de página única (SPA) utilizando o framework Vue.js, sendo responsável pela interface e experiência do usuário. O back-end principal, por sua vez, é desenvolvido em Java com Spring Boot sendo dividido em multi módulos. Essa estrutura modular e multifacetada confere ao sistema uma complexidade significativa, especialmente no que diz respeito à rastreabilidade entre requisitos e implementações.
+Sua implementação adota a estrutura de múltiplos projetos, sendo os módulos de \textit{front-end} e \textit{back-end} os princiapis, além desses o repositório inclui outros componentes auxiliares relacionados à operação da plataforma. O \textit{front-end} é construído como uma aplicação de página única (SPA) utilizando o framework Vue.js, sendo responsável pela interface e experiência do usuário. O \textit{back-end} principal, por sua vez, é desenvolvido em Java com Spring Boot sendo dividido em multi módulos. Essa estrutura modular e multifacetada confere ao sistema uma complexidade significativa, especialmente no que diz respeito à rastreabilidade entre requisitos e implementações.
 
 \section{Metodologia}
 
 O percurso metodológico deste trabalho foi fundamentado em um processo iterativo, estruturado em seis etapas principais. Cada etapa representa uma fase distinta do experimento de verificação automatizada da conformidade entre requisitos e código-fonte, conforme descrito a seguir. 
 
 \begin{enumerate}
-    \item \textbf{Coleta de Artefatos:} A fase inicial consistiu na extração dos artefatos do sistema “Nivelamento Online”, diretamente de seu repositório Git. Foram coletados tanto os documentos de requisitos quanto os arquivos de código-fonte que serviram de base para o experimento. 
-    \item \textbf{Formulação Inicial dos Prompts:} Com base nos requisitos, elaboraram-se prompts iniciais em linguagem natural, cujo propósito era instruir os modelos de linguagem a verificar a implementação de cada requisito. Tais prompts foram projetados para que os modelos classificassem os requisitos em categorias predefinidas (\textit{Implemented}, \textit{Partially}, \textit{Missing} ou \textit{Unknown}) e justificassem suas conclusões. 
-    \item \textbf{Execução Inicial com LLMs:} Subsequentemente, os prompts foram submetidos a diferentes modelos de linguagem por meio da ferramenta Gemini CLI e, paralelamente, via GitHub Copilot no Visual Studio Code. Essa execução inicial estabeleceu uma linha de base para a avaliação de desempenho. 
-    \item \textbf{Refinamento com Engenharia de Prompt:} A análise dos resultados preliminares permitiu identificar falhas interpretativas e limitações. Diante disso, os prompts foram aprimorados com o uso de técnicas de engenharia de prompt, como \textit{few-shot prompting} (inserção de exemplos) e \textit{chain-of-thought prompting} (estímulo ao raciocínio em cadeia), objetivando maior robustez e rastreabilidade semântica. 
-    \item \textbf{Reexecução com Prompts Refinados:} Os prompts otimizados foram então reaplicados aos mesmos modelos e ambientes. Essa etapa foi crucial para comparar diretamente o desempenho antes e depois do refinamento, permitindo, assim, mensurar o impacto das técnicas de engenharia de prompt. 
+    \item \textbf{Coleta de Artefatos:} A fase inicial consistiu na extração dos artefatos do sistema “Nivelamento Online”, diretamente de seu repositório Git. Foram coletados tanto os documentos de requisitos quanto os arquivos de código-fonte que serviram de base para o experimento;
+    \item \textbf{Formulação Inicial dos Prompts:} Com base nos requisitos, elaboraram-se prompts iniciais em linguagem natural, cujo propósito era instruir os modelos de linguagem a verificar a implementação de cada requisito. Tais prompts foram projetados para que os modelos classificassem os requisitos em categorias predefinidas (\textit{Implemented}, \textit{Partially}, \textit{Missing} ou \textit{Unknown}) e justificassem suas conclusões;
+    \item \textbf{Execução Inicial com LLMs:} Subsequentemente, os prompts foram submetidos a diferentes modelos de linguagem por meio da ferramenta Gemini CLI e, paralelamente, via GitHub Copilot no Visual Studio Code. Essa execução inicial estabeleceu uma linha de base para a avaliação de desempenho;
+    \item \textbf{Refinamento com Engenharia de Prompt:} A análise dos resultados preliminares permitiu identificar falhas interpretativas e limitações. Diante disso, os prompts foram aprimorados com o uso de técnicas de engenharia de prompt, como \textit{few-shot prompting} (inserção de exemplos) e \textit{chain-of-thought prompting} (estímulo ao raciocínio em cadeia), objetivando maior robustez e rastreabilidade semântica;
+    \item \textbf{Reexecução com Prompts Refinados:} Os prompts otimizados foram então reaplicados aos mesmos modelos e ambientes. Essa etapa foi crucial para comparar diretamente o desempenho antes e depois do refinamento, permitindo, assim, mensurar o impacto das técnicas de engenharia de prompt;
     \item \textbf{Coleta e Análise dos Resultados:} Por fim, todas as respostas geradas foram sistematicamente registradas, categorizadas e avaliadas. As análises abrangeram a validação das respostas e a medição da acurácia, taxa de omissão, precisão, \textit{recall} e \textit{F1-score}. Essas métricas foram utilizadas por serem amplamente reconhecidas na literatura como indicadores robustos para avaliar classificadores, permitindo mensurar não apenas a proporção de acertos, mas também a capacidade dos modelos em evitar falsas classificações e identificar corretamente os requisitos relevantes. Os dados foram consolidados em tabelas de desempenho para viabilizar uma interpretação quantitativa e qualitativa do comportamento dos modelos.
 \end{enumerate}
 
@@ -35,7 +35,7 @@ Para contextualizar a solução proposta, foi utilizado o modelo C4, que permite
 
 \begin{figure}[H]
     \centering
-    \begin{adjustbox}{width=0.9\textwidth,center}
+    \begin{adjustbox}{width=1.0\textwidth,center}
         \includegraphics{imgs/c4_context.jpeg}
     \end{adjustbox}
     \caption{Diagrama de Contexto (Fonte: Própria)}
@@ -47,7 +47,7 @@ Para contextualizar a solução proposta, foi utilizado o modelo C4, que permite
     \begin{adjustbox}{width=1.0\textwidth,center}
         \includegraphics{imgs/c4_container.jpeg}
     \end{adjustbox}
-    \caption{Diagrama de Containers (Fonte: Própria)}
+    \caption{Diagrama de \textit{Containers} (Fonte: Própria)}
     \label{fig:c4_containers}
 \end{figure}
 
@@ -69,7 +69,7 @@ O ambiente experimental foi configurado para permitir a comparação de desempen
 As ferramentas e os respectivos modelos utilizados foram:
 
 \begin{itemize}
-    \item Gemini CLI: Interface de linha de comando utilizada para interagir diretamente com o modelo Gemini 2.5 Pro.
+    \item Gemini CLI: Interface de linha de comando utilizada para interagir diretamente com o modelo Gemini 2.5 Pro;
     \item GitHub Copilot (integrado ao Visual Studio Code): A extensão foi configurada para alternar entre os seguintes modelos de apoio: Gemini 2.5 Pro, Claude Sonnet 4 e GPT 5.
 \end{itemize}
 
@@ -77,9 +77,9 @@ Todos os testes foram executados mantendo os hiperparâmetros e configurações 
 
 
 \section{Estruturação da Solução e Etapas do Experimento}
-O sistema sob avaliação organiza, em um mesmo repositório, os módulos de \textit{front-end}, múltiplos serviços de \textit{back-end} e componentes adicionais (por exemplo, aplicativo móvel e serviços auxiliares). Para controlar efeitos de escopo durante a análise, foram definidos recortes explícitos da \textit{janela de contexto} disponibilizada ao agente. Nos cenários \textit{Front-end} e \textit{Back-end}, o modelo recebeu apenas os arquivos pertencentes às respectivas pastas. Consequentemente, quaisquer evidências existentes fora desse recorte ou cuja verificação exigisse informações não disponíveis no código visível deveriam ser classificadas como \textit{Unknown}. Por exemplo, ao avaliar um requisito de interface visual a partir do escopo do \textit{back-end}, o modelo não possui acesso à camada responsável, resultando em ausência de evidência observável. Da mesma forma, requisitos relacionados a tempo de resposta ou comportamento dinâmico da IA (como os presentes no módulo de geração automática de questões) não podem ser aferidos diretamente a partir do código-fonte, justificando também a classificação como \textit{Unknown} nesses casos.
+O sistema sob avaliação organiza, em um mesmo repositório, os módulos de \textit{front-end}, múltiplos serviços de \textit{back-end} e componentes adicionais (por exemplo, aplicativo móvel e serviços auxiliares). Para controlar efeitos de escopo durante a análise, foram definidos recortes explícitos da \textit{janela de contexto} disponibilizada ao agente. Nos cenários \textit{front-end} e \textit{Back-end}, o modelo recebeu apenas os arquivos pertencentes às respectivas pastas. Consequentemente, quaisquer evidências existentes fora desse recorte ou cuja verificação exigisse informações não disponíveis no código visível deveriam ser classificadas como \textit{Unknown}. Por exemplo, ao avaliar um requisito de interface visual a partir do escopo do \textit{back-end}, o modelo não possui acesso à camada responsável, resultando em ausência de evidência observável. Da mesma forma, requisitos relacionados a tempo de resposta ou comportamento dinâmico da IA (como os presentes no módulo de geração automática de questões) não podem ser aferidos diretamente a partir do código-fonte, justificando também a classificação como \textit{Unknown} nesses casos.
 
-No cenário de \textit{Repositório completo}, a IA teve acesso irrestrito a todos os diretórios do monorepositório, o que implica em um contexto mais amplo e heterogêneo para análise. Essa configuração exige que o modelo seja capaz de localizar, interpretar e correlacionar corretamente evidências distribuídas entre múltiplos serviços, camadas e tecnologias. Além da maior densidade informacional, o repositório apresenta estruturas semelhantes entre diferentes módulos, incluindo arquivos com nomes idênticos em contextos distintos, o que aumenta o risco de interpretações imprecisas. Tais características tornam o processo de rastreamento mais complexo, exigindo maior capacidade de filtragem semântica e distinção entre componentes funcionalmente próximos, mas logicamente independentes.
+No cenário de Repositório completo, a IA teve acesso irrestrito a todos os diretórios do monorepositório, o que implica em um contexto mais amplo e heterogêneo para análise. Essa configuração exige que o modelo seja capaz de localizar, interpretar e correlacionar corretamente evidências distribuídas entre múltiplos serviços, camadas e tecnologias. Além da maior densidade informacional, o repositório apresenta estruturas semelhantes entre diferentes módulos, incluindo arquivos com nomes idênticos em contextos distintos, o que aumenta o risco de interpretações imprecisas. Tais características tornam o processo de rastreamento mais complexo, exigindo maior capacidade de filtragem semântica e distinção entre componentes funcionalmente próximos, mas logicamente independentes.
 
 Os experimentos foram conduzidos em três contextos de análise:
 \begin{enumerate}
@@ -190,9 +190,9 @@ IA-RNF07  & Implemented & Implemented & Sim & --- \\
 \end{tabular}
 \end{table}
 
-\noindent\textit{Observação:} os prefixos REL e IA nos identificadores da Tabela~\ref{tab:exemplo-resultados} referem-se, respectivamente, ao documento de casos de teste do módulo de Relatórios e ao documento do módulo com funcionalidade de IA.
+\noindent\textit{Observação:} os prefixos REL e IA nos identificadores da Tabela~\ref{tab:exemplo-resultados} referem-se, respectivamente, ao documento de casos de teste do módulo de Relatórios e ao documento do módulo com funcionalidade de IA, além disso os termos Gold e Pred correspondem às categorias de referência e predita pelo modelo, respectivamente.
 
-A partir desses resultados, foram derivadas duas matrizes de confusão distintas para cada cenário experimental: 
+A partir desses resultados, foram derivadas duas matrizes de confusão distintas para cada cenário experimental, afim de serem utilizadas posteriormente na avaliação quantitativa do desempenho dos modelos:
 \begin{itemize}
     \item Uma matriz de confusão simplificada, considerando apenas a categoria predita em comparação com a categoria de referência (\textit{gold standard}); 
     \item Uma matriz de confusão expandida, que, além da categoria, avalia a coerência e a validade técnica da justificativa fornecida pelo modelo. 
@@ -202,8 +202,8 @@ A partir desses resultados, foram derivadas duas matrizes de confusão distintas
 
 Para tornar mais tangível o processo de refinamento, a seguir são apresentados exemplos das técnicas de engenharia de prompt empregadas. Conforme apontado pela literatura, a adição de exemplos (\textit{few-shot prompting}) e a estruturação do raciocínio (\textit{chain-of-thought}) são estratégias eficazes para aprimorar a precisão em tarefas complexas.
 
-\textbf{Few-shot prompting.}
-Exemplos mínimos em formato JSON que demonstram a estrutura esperada da resposta e o nível de evidência requerido. O exemplo abaixo ilustra como diferentes rótulos de classificação devem ser justificados com referências a arquivos e trechos específicos:
+\textit{\textbf{Few-shot prompting.}}
+Exemplos mínimos em formato JSON que demonstram a estrutura esperada da resposta e o nível de evidência requerido. O exemplo abaixo ilustra como diferentes rótulos de classificação devem ser justificados com referência a arquivos e trechos específicos:
 
 
 \begin{minted}[fontsize=\small, breaklines=true, bgcolor=gray!5, linenos]{json}
@@ -253,7 +253,7 @@ Exemplos mínimos em formato JSON que demonstram a estrutura esperada da respost
 \vspace{2em}
 
 
-\textbf{Chain-of-thought (CoT).}
+\textit{\textbf{Chain-of-thought (CoT).}}
 Adicionalmente, o \textit{prompt} instruiu o modelo a seguir um protocolo cognitivo explícito, aumentando a rastreabilidade das conclusões e a consistência entre itens:
 \begin{algorithm}
 \begin{minted}[fontsize=\small, breaklines=true, linenos, bgcolor=gray!5]{markdown}
@@ -279,7 +279,7 @@ Adicionalmente, o \textit{prompt} instruiu o modelo a seguir um protocolo cognit
     6. **Justificar sua decisão tecnicamente**, apontando 
        arquivos, linhas e raciocínio.
 \end{minted}
-\caption{Chain-of-thought prompt para análise estruturada}
+\caption{\textit{Chain-of-thought} prompt para análise estruturada}
 \label{alg:prompt_cot}
 \end{algorithm}
 

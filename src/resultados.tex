@@ -8,9 +8,9 @@ Esta seção apresenta e discute os resultados obtidos a partir da aplicação d
 Os dados analisados referem-se exclusivamente aos casos de teste cujo gabarito era “\texttt{Implemented}” ou “\texttt{Unknown}”, por serem os únicos rótulos corretos esperados para os requisitos avaliados. Cada linha de resposta dos modelos foi avaliada em função de sua correspondência com esses gabaritos, resultando nos seguintes componentes estatísticos:
 
 \begin{itemize}
-    \item \textbf{Verdadeiros Positivos (VP)}: respostas em que o modelo classificou corretamente o requisito (como \texttt{Implemented} ou \texttt{Unknown}).
-    \item \textbf{VP-Estrito}: subconjunto dos verdadeiros positivos em que, além da classificação correta, a justificativa apresentada também estava tecnicamente correta, coerente e baseada em evidência observável no código.
-    \item \textbf{Falsos Positivos (FP)}: casos em que o modelo classificou como implementado algo que não estava implementado, ou como conhecido algo que era desconhecido.
+    \item \textbf{Verdadeiros Positivos (VP)}: respostas em que o modelo classificou corretamente o requisito (como \texttt{Implemented} ou \texttt{Unknown});
+    \item \textbf{VP-Estrito}: subconjunto dos verdadeiros positivos em que, além da classificação correta, a justificativa apresentada também estava tecnicamente correta, coerente e baseada em evidência observável no código;
+    \item \textbf{Falsos Positivos (FP)}: casos em que o modelo classificou como implementado algo que não estava implementado, ou como conhecido algo que era desconhecido;
     \item \textbf{Falsos Negativos (FN)}: requisitos que estavam implementados ou presentes no repositório, mas foram classificados como ausentes ou ignorados pelo modelo.
 \end{itemize}
 
